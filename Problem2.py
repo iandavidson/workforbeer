@@ -12,31 +12,31 @@ the elements might be lists, and returns one list with no list elements. E.g.
 """
 
 
-def flattenListLocal(oldList, newList ):
+def extractFirstWorkingElement(workingList, flatList ):
     """
 This algorithm recursively breaks down list named: oldlist using a depth-first traversal,
 Then adding each element found to a list named: newList
     """
 
     #basecase to escape function when done
-    if len(oldList) == 0:
+    if len(workingList) == 0:
         return
 
 
     #distinguish between list or int
-    if type(oldList[0]) == list:
+    if type(workingList[0]) == list:
     #check to see if the first elem in old list is actually a deep list
 
-        flattenListLocal(oldList[0], newList) #this is the case which deals with deep lists
+        extractFirstWorkingElement(workingList[0], flatList) #this is the case which deals with deep lists
     else:
-        newList.append(oldList[0])
+        flatList.append(workingList[0])
 
     #no matter the direction of that if statement, by this point everything from oldList[0] should be inside newList
-    oldList.pop(0)
+    workingList.pop(0)
 
 
     #recusive call with a smaller oldList
-    return flattenListLocal(oldList, newList)
+    return extractFirstWorkingElement(workingList, flatList)
 
 
 def flattenList(startingList):
@@ -46,10 +46,10 @@ this function calls the a helper function then returns the flat-version of the p
 Because lists are passed by reference we can just the return the fully formed, flat list: newList
     """
 
-    newList  = []
-    flattenListLocal(startingList, newList)
+    flatList  = []
+    extractFirstWorkingElement(startingList, flatList)
 
-    return newList
+    return flatList
 
 def main():
     list = [[1,2],3,[[4,5],6],7]

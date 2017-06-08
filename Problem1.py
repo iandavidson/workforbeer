@@ -61,7 +61,10 @@ def createRepresentation(fileName):
 
 def main():
 
-    container = createRepresentation("lebowski-intro.txt")
+    filePath = input("enter path to file: ")
+
+
+    container = createRepresentation(filePath)
 
     print(container)
 
